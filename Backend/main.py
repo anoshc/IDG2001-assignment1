@@ -3,28 +3,20 @@ import json
 import html
 import os
 from pymongo import MongoClient
+# Imported database.py file
+import database
 
 # Set the flask app
 app = Flask(__name__)
-#api = Api(app)
-const client = require('./database.py');
 
-client.connect((err) => {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log('Connected to MongoDB!');
-  }
-});
-# client = MongoClient('mongodb+srv://idg2001:mongodbpassword@cluster0.luifcsb.mongodb.net/vCardDB')
-# db = client.mydatabase
+
 
 
 # Test GET
 
 # Hele greia er et Endpoint
 # Dette er routen til Endpointet
-@app.route('/hei', methods=['GET'])
+@app.route('/', methods=['GET'])
 # Dette er controlleren til Endpointet
 def hello_world():
     response = {'message': 'Hello from gruppen!'}
