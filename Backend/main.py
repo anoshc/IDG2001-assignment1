@@ -7,9 +7,17 @@ from pymongo import MongoClient
 # Set the flask app
 app = Flask(__name__)
 #api = Api(app)
+const client = require('./database.py');
 
-client = MongoClient('mongodb+srv://idg2001:mongodbpassword@cluster0.luifcsb.mongodb.net/vCardDB')
-db = client.mydatabase
+client.connect((err) => {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log('Connected to MongoDB!');
+  }
+});
+# client = MongoClient('mongodb+srv://idg2001:mongodbpassword@cluster0.luifcsb.mongodb.net/vCardDB')
+# db = client.mydatabase
 
 
 # Test GET

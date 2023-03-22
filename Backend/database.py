@@ -1,14 +1,23 @@
 from flask import Flask
 from pymongo import MongoClient
+from dotenv import dotenv_values
 #import os
 
 #DB_URI = "mongodb+srv://lisamarimyrene:mongodbpassword@cluster0.mub535i.mongodb.net/vCardDB?retryWrites=true&w=majority"
 
 app = Flask(__name__)
 
+config = dotenv_values('.env')
+mongo_uri = config['MONGO_URI']
+client = MongoClient(mongo_uri)
 
-client = MongoClient('mongodb+srv://idg2001:mongodbpassword@cluster0.luifcsb.mongodb.net/vCardDB')
-db = client.mydatabase
+db = client['vCardDB']
+collection = db['vcard']
+
+documents = collection.find({})
+for document in documents:
+   print(document)
+
 
 
 if __name__ == '__main__':
