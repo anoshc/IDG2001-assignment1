@@ -2,11 +2,12 @@ from flask import Flask, render_template, request, jsonify
 import json
 import html
 import os
-from pymongo import MongoClient
 # Imported database.py file
 import database
 # Imported varables from database.py file
-from database import db, collection 
+from database import collection 
+
+from 
 
 # Set the flask app
 app = Flask(__name__)
@@ -40,11 +41,11 @@ def hello_railway():
 
 
 # # Post
-# @app.route('/api/users', methods=['POST'])
-# def create_user():
-#     user_data = request.json
-#     # implement code to create and return user data
-#     return jsonify(user)
+@app.route('', methods=['POST'])
+def create_user():
+    user_data = export.json
+    # implement code to create and return user data
+    return jsonify(user)
 
 # @app.route('/')
 # def index():
