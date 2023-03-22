@@ -1,9 +1,9 @@
 from flask import Flask
 from pymongo import MongoClient
 from dotenv import dotenv_values
-#import os
+# import os
 
-#DB_URI = "mongodb+srv://lisamarimyrene:mongodbpassword@cluster0.mub535i.mongodb.net/vCardDB?retryWrites=true&w=majority"
+# DB_URI = "mongodb+srv://lisamarimyrene:mongodbpassword@cluster0.mub535i.mongodb.net/vCardDB?retryWrites=true&w=majority"
 
 app = Flask(__name__)
 
@@ -16,10 +16,8 @@ collection = db['vcard']
 
 documents = collection.find({})
 for document in documents:
-   print(document)
-
-#tets
+    print(document)
 
 if __name__ == '__main__':
-   app.run(port=4000)
-   #app.run(host=os.getenv('HOST', 'localhost'), port=os.getenv('PORT', '5000'))
+    app.run(port=4000)
+    # app.run(host=os.getenv('HOST', 'localhost'), port=os.getenv('PORT', '5000'))
