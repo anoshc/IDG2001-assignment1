@@ -5,6 +5,8 @@ import os
 from pymongo import MongoClient
 # Imported database.py file
 import database
+# Imported varables from database.py file
+from database import db, collection 
 
 # Set the flask app
 app = Flask(__name__)
@@ -22,6 +24,13 @@ def hello_world():
     response = {'message': 'Hello from gruppen!'}
     return jsonify(response)
 
+@app.route('/railway', methods=['GET'])
+# Dette er controlleren til Endpointet
+def hello_railway():
+    data = collection.find()
+    return f'Hello, {data}!'
+
+
 # Get
 # @app.route('/api/users')
 # def get_users():
@@ -37,12 +46,12 @@ def hello_world():
 #     # implement code to create and return user data
 #     return jsonify(user)
 
-@app.route('/')
-def index():
-    db = client.mydatabase
-    collection = db.mycollection
-    data = collection.find_one()
-    return f'Hello, {data}!'
+# @app.route('/')
+# def index():
+#     db = client.mydatabase
+#     collection = db.mycollection
+#     data = collection.find_one()
+#     return f'Hello, {data}!'
 # @app.route('/results')
 # def results():
 #     return render_template('../Frontend/index.html')
