@@ -16,7 +16,8 @@ file), sends it to an API, parses it server-side and adds it to a database.
 # Specific requirements 
 • Server-side programming language: Python
 • Database type: MongoDB
-• API design: REST
+• API design: REST 
+.
 
 
 # API 
