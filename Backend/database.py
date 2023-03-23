@@ -1,9 +1,6 @@
 from flask import Flask
 from pymongo import MongoClient
 from dotenv import dotenv_values
-#import os
-
-#DB_URI = "mongodb+srv://lisamarimyrene:mongodbpassword@cluster0.mub535i.mongodb.net/vCardDB?retryWrites=true&w=majority"
 
 app = Flask(__name__)
 
@@ -17,8 +14,7 @@ collection = db['vcard']
 documents = collection.find({})
 for document in documents:
    print(document)
-
-#tets
+   
 
 if __name__ == '__main__':
    app.run(port=4000)
