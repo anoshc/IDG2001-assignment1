@@ -24,3 +24,9 @@ N:Moskowitz;Robert
 FN:Robert Moskowitz
 EMAIL;TYPE=INTERNET:rgm-ietf@htt-consult.com
 END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+N:Alexandra;Lisa
+FN:Alexandra Lisa
+EMAIL;TYPE=INTERNET:rgm-ietf@htt-consult.com
+END:VCARD
