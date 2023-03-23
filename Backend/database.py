@@ -17,5 +17,5 @@ for document in documents:
    
 
 if __name__ == '__main__':
-   app.run(port=4000)
-   #app.run(host=os.getenv('HOST', 'localhost'), port=os.getenv('PORT', '5000'))
+    app.run(port=4000)
+    # app.run(host=os.getenv('HOST', 'localhost'), port=os.getenv('PORT', '5000'))
