@@ -19,9 +19,9 @@ app = Flask(__name__)
 
 #hei
 
-# POST /contacts endpoint
+# POST /contacts endpoint – Lisa, fortsette på den
 @app.route('/contacts', methods=['POST'])
-def newContact():
+def new_contact():
     vcard_parser()
     with open('export.json') as file:
         file_data = json.load(file)
@@ -29,39 +29,36 @@ def newContact():
         collection.insert_many(file_data)
     else:
         collection.insert_one(file_data)
+    return jsonify(file_data)
+    
+''' 
+    The POST api endpoint does this:
+    
+    1. Calls a vcard_parser() function (not shown in this code) to parse vCard data.
+
+    2. Reads the contents of a file named export.json into a variable called file_data, 
+    using the json.load() function to parse the JSON-formatted data in the file.
+
+    3. Checks if the file_data variable is a list. If it is, it assumes that the data contains 
+    multiple records and inserts them all into a MongoDB collection using the insert_many() method. 
+    If it is not a list, it assumes that the data contains a single record and inserts it into 
+    the MongoDB collection using the insert_one() method.
+
+    4. !Returning the json object as output (doesn't work)
+'''
         
 
-   # user_data = export.json
-    # implement code to create and return user data
-    # return jsonify(user)
+# GET /contacts endpoint (json) – Alexandra
 
+# GET /contacts/id endpoint (json) - Anosh
 
-
-# GET /contacts endpoint (json)
-# @app.route('/contacts', methods=['GET'])
-# GET /contacts/id endpoint (json)
 # GET /contacts/vcard (vcard)
+
 # GET /contacts/id/vcard (vcard)
 
 
 
-
-
-# Hele greia er et Endpoint
-# Dette er routen til Endpointet
-
-
-
-# @app.route('/', methods=['GET'])
-# # Dette er controlleren til Endpointet
-#     def hello_world():
-#      response = {'message': 'Hello from gruppen!'}
-#      return jsonify(response)
-
-
 # Just a standard if that is needed in every flask application
 if __name__ == '__main__':
-    app.run(port=3000)
+    app.run(port=3000, debug=True)
 
-# Run app
-app.run()
