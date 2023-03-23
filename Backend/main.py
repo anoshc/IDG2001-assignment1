@@ -1,24 +1,52 @@
+# Import modules
 from flask import Flask, render_template, request, jsonify
 import json
 import html
 import os
-# Imported database.py file
+
+# Import files
 import database
-# Imported varables from database.py file
-from database import collection 
-
 import functions
+
+# Imported functions from files
+from database import collection 
 from functions import 
-
-
 
 # Set the flask app
 app = Flask(__name__)
 
 
+# POST /contacts endpoint
+@app.route('/contacts', methods=['POST'])
+def newContact():
+    user_data = export.json
+    # implement code to create and return user data
+    return jsonify(user)
 
 
-# Test GET
+# GET /contacts endpoint (json)
+
+
+# GET /contacts/id endpoint (json)
+
+
+# GET /contacts/vcard (vcard)
+
+
+# GET /contacts/id/vcard (vcard)
+
+
+
+
+
+
+
+''' TEST API FOR Å SJEKKE OM DET FUNKA BERRE'''
+@app.route('/railway', methods=['GET'])
+# Dette er controlleren til Endpointet
+def hello_railway():
+    data = collection.find()
+    return f'Hello, {data}!'
 
 # Hele greia er et Endpoint
 # Dette er routen til Endpointet
@@ -27,25 +55,6 @@ app = Flask(__name__)
 def hello_world():
     response = {'message': 'Hello from gruppen!'}
     return jsonify(response)
-
-@app.route('/railway', methods=['GET'])
-# Dette er controlleren til Endpointet
-def hello_railway():
-    data = collection.find()
-    return f'Hello, {data}!'
-
-
-
-# # Post
-@app.route('', methods=['POST'])
-def create_user():
-    user_data = export.json
-    # implement code to create and return user data
-    return jsonify(user)
-
-
-
-
 
 
 # Just a standard if that is needed in every flask application
