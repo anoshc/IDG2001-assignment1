@@ -4,7 +4,7 @@
 import json
 
 # Settings
-INPUT_NAME = 'sample.vcf'
+INPUT_NAME = 'vcard.vcf'
 OUTPUT_NAME = 'export.json'
 
 

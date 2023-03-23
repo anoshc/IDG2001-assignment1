@@ -22,21 +22,23 @@ app = Flask(__name__)
 # POST /contacts endpoint
 @app.route('/contacts', methods=['POST'])
 def newContact():
- vcard_parser()
- with open('data.json') as file:
-    file_data = json.load(file)
- if isinstance(file_data, list):
-    collection.insert_many(file_data) 
- else:
-    collection.insert_one(file_data)
+    vcard_parser()
+    with open('export.json') as file:
+        file_data = json.load(file)
+    if isinstance(file_data, list):
+        collection.insert_many(file_data)
+    else:
+        collection.insert_one(file_data)
+        
+
    # user_data = export.json
     # implement code to create and return user data
     # return jsonify(user)
 
 
 
-    # GET /contacts endpoint (json)
-    @app.route('/contacts', methods=['GET'])
+# GET /contacts endpoint (json)
+# @app.route('/contacts', methods=['GET'])
 # GET /contacts/id endpoint (json)
 # GET /contacts/vcard (vcard)
 # GET /contacts/id/vcard (vcard)
@@ -50,18 +52,16 @@ def newContact():
 
 
 
-    @app.route('/', methods=['GET'])
-# Dette er controlleren til Endpointet
-    def hello_world():
-     response = {'message': 'Hello from gruppen!'}
-     return jsonify(response)
+# @app.route('/', methods=['GET'])
+# # Dette er controlleren til Endpointet
+#     def hello_world():
+#      response = {'message': 'Hello from gruppen!'}
+#      return jsonify(response)
 
 
 # Just a standard if that is needed in every flask application
 if __name__ == '__main__':
-    app.run(port=4000)
-    # app.run(host=os.getenv('HOST', 'localhost'), port=os.getenv('PORT', '5000'))
-
+    app.run(port=3000)
 
 # Run app
 app.run()
