@@ -19,11 +19,10 @@ from vcard_parser import vcard_parser
 # Set the flask app
 app = Flask(__name__)
 
-#hei
 
-# POST /contacts endpoint
+# POST /contacts endpoint – Lisa, fortsette på den
 @app.route('/contacts', methods=['POST'])
-def newContact():
+def new_contact():
     vcard_parser()
     with open('export.json') as file:
         file_data = json.load(file)
@@ -34,12 +33,12 @@ def newContact():
         
     else:
         collection.insert_one(file_data)
-        response = {'message': 'Inserted one'}
+         response = {'message': 'Inserted one'}
         return jsonify(response)
-        
 
 
-#GET/contacts : Finds all contacts 
+
+#GET/contacts - Alexandra:  Finds all contacts 
 @app.route('/contacts', methods=['GET'])
 def getAllContacts():
  result = collection.find()
@@ -47,43 +46,44 @@ def getAllContacts():
   
 
 
-#Finds one contact based off id
-@app.route('/contactsid', methods=['GET'])
+#GET/contacts/:id - Anosh: Shows one contact based off id
+@app.route('/contacts/:id', methods=['GET'])
 def getContacts():
   from bson.objectid import ObjectId
+  #Kan displaye dokument basert på id, men hvis man går på routen (/:id) så finner den ikke id.
   result = collection.find_one({"_id": ObjectId("641c63f64b212cebf543eb01")})
   return f'{result}'
-      
+
 
 
  # user_data = export.json
     # implement code to create and return user data
     # return jsonify(user)
 
+   # return jsonify(file_data)
 
+# GET /contacts/id endpoint (json) - Anosh
 
-# GET /contacts endpoint (json)
-# @app.route('/contacts', methods=['GET'])
-# GET /contacts/id endpoint (json)
 # GET /contacts/vcard (vcard)
+
 # GET /contacts/id/vcard (vcard)
 
 
+''' 
+    The POST api endpoint does this:
+    
+    1. Calls a vcard_parser() function (not shown in this code) to parse vCard data.
 
+    2. Reads the contents of a file named export.json into a variable called file_data, 
+    using the json.load() function to parse the JSON-formatted data in the file.
 
+    3. Checks if the file_data variable is a list. If it is, it assumes that the data contains 
+    multiple records and inserts them all into a MongoDB collection using the insert_many() method. 
+    If it is not a list, it assumes that the data contains a single record and inserts it into 
+    the MongoDB collection using the insert_one() method.
 
-# Hele greia er et Endpoint
-# Dette er routen til Endpointet
-
-
-
-# @app.route('/', methods=['GET'])
-# # Dette er controlleren til Endpointet
-#     def hello_world():
-#      response = {'message': 'Hello from gruppen!'}
-#      return jsonify(response)
-
-
+    4. !Returning the json object as output (doesn't work)
+'''
 
 
 
@@ -91,7 +91,6 @@ def getContacts():
 
 # Just a standard if that is needed in every flask application
 if __name__ == '__main__':
-    app.run(port=3000)
-
+    app.run(port=3000, debug=True)
 
 
