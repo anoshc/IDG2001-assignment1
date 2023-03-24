@@ -28,17 +28,17 @@ def new_contact():
         file_data = json.load(file)
     if isinstance(file_data, list):
         collection.insert_many(file_data)
-        response = {'message': 'Inserted many'}
+        response = {'message': 'Inserted many documents to the database'}
         return jsonify(response)
         
     else:
         collection.insert_one(file_data)
-         response = {'message': 'Inserted one'}
+        response = {'message': 'Inserted one document to the database'}
         return jsonify(response)
 
 
 
-#GET/contacts - Alexandra:  Finds all contacts 
+#GET/contacts -  Finds all contacts 
 @app.route('/contacts', methods=['GET'])
 def getAllContacts():
  result = collection.find()
@@ -46,13 +46,27 @@ def getAllContacts():
   
 
 
-#GET/contacts/:id - Anosh: Shows one contact based off id
-@app.route('/contacts/:id', methods=['GET'])
-def getContacts():
+#GET/contacts/<id> - Shows one contact based off id
+@app.route('/contacts/<id>', methods=['GET'])
+def getContacts(id):
   from bson.objectid import ObjectId
   #Kan displaye dokument basert på id, men hvis man går på routen (/:id) så finner den ikke id.
-  result = collection.find_one({"_id": ObjectId("641c63f64b212cebf543eb01")})
+  result = collection.find_one({"_id": ObjectId(id)})
   return f'{result}'
+
+
+
+# GET /contacts/vcard (vcard)
+@app.route('/contacts/vcard', methods=['GET'])
+def getVCard():
+ print("hi")
+
+
+
+# GET /contacts/id/vcard (vcard)
+@app.route('/contacts/<id>/vcard', methods=['GET'])
+def getVCardID(id):
+   print("hi")
 
 
 
@@ -62,11 +76,7 @@ def getContacts():
 
    # return jsonify(file_data)
 
-# GET /contacts/id endpoint (json) - Anosh
 
-# GET /contacts/vcard (vcard)
-
-# GET /contacts/id/vcard (vcard)
 
 
 ''' 
