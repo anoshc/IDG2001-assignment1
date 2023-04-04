@@ -32,7 +32,6 @@ def upload_file():
 # POST /contacts endpoint – Lisa, fortsette på den
 @app.route('/contacts', methods=['POST'])
 def new_contact():
-def new_contact():
     # Hente filen fra html formet
     if request.method == 'POST':
         uploaded_file = request.files['file']
