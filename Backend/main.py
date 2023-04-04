@@ -19,18 +19,15 @@ from vcard_parser import vcard_parser
 
 # Set the flask app
 app = Flask(__name__)
-#app.config['UPLOAD_FOLDER'] = '/uploaded_vcards'
 
 
 
-
-# Rendre HTML formet
+# Render the HTML form to the page
 @app.route('/')
 def upload_file():
    return render_template('index.html')
    
-
-# POST /contacts endpoint – Lisa, fortsette på den
+# POST/contacts endpoint - Get the uploaded vcf-file, parse it to JSON, and push it to the database. 
 @app.route('/contacts', methods=['POST'])
 def new_contact():
     # Hente filen fra html formet
@@ -40,7 +37,7 @@ def new_contact():
         if uploaded_file.filename != '':
             uploaded_file.save(uploaded_file.filename) # Saver filen
             vcard_parser(uploaded_file.filename) # Parse filen til JSON
-            os.remove(uploaded_file.filename) # Remove the uploaded file locally 
+            os.remove(uploaded_file.filename) # Fjerne vcf filen lokalt 
             return 'File read successfully and uploaded to database!'
         else:
             return 'Could not read file, try again.'
@@ -55,7 +52,7 @@ def new_contact():
         return jsonify(file_data)
         
 
-#GET/contacts -  Finds all contacts 
+# GET/contacts - Show all contacts 
 @app.route('/contacts', methods=['GET'])
 def getAllContacts():
  result = collection.find()
@@ -63,7 +60,7 @@ def getAllContacts():
   
 
 
-#GET/contacts/<id> - Shows one contact based off id
+# GET/contacts/<id> - Shows one contact based on id
 @app.route('/contacts/<id>', methods=['GET'])
 def getContacts(id):
   from bson.objectid import ObjectId
@@ -73,49 +70,18 @@ def getContacts(id):
 
 
 
-# GET /contacts/vcard (vcard)
+# GET /contacts/vcard (vcard) – Parse the contacts in json back to vcf, and shows all contacts in vcf. 
 @app.route('/contacts/vcard', methods=['GET'])
 def getVCard():
  print("hi")
 
 
 
-# GET /contacts/id/vcard (vcard)
+# GET /contacts/id/vcard (vcard) – Parse one contact (based on id) in json back to vcf, and shows that one contact in vcf.
 @app.route('/contacts/<id>/vcard', methods=['GET'])
 def getVCardID(id):
    print("hi")
 
 
 
-# user_data = export.json
-  # implement code to create and return user data
-  # return jsonify(user)
-
- # return jsonify(file_data)
-
-
-''' 
-    The POST api endpoint does this:
-    
-    1. Calls a vcard_parser() function (not shown in this code) to parse vCard data.
-
-    2. Reads the contents of a file named export.json into a variable called file_data, 
-    using the json.load() function to parse the JSON-formatted data in the file.
-
-    3. Checks if the file_data variable is a list. If it is, it assumes that the data contains 
-    multiple records and inserts them all into a MongoDB collection using the insert_many() method. 
-    If it is not a list, it assumes that the data contains a single record and inserts it into 
-    the MongoDB collection using the insert_one() method.
-
-    4. !Returning the json object as output (doesn't work)
-'''
-
-
-
-
-
-# Just a standard if that is needed in every flask application
-if __name__ == '__main__':
-    app.run(port=3000, debug=True)
-
-
+app.run()
