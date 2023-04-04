@@ -1,5 +1,6 @@
 # Import modules
 from flask import Flask, render_template, request, jsonify
+from werkzeug import secure_filename
 import json
 import html
 import os
@@ -22,8 +23,12 @@ app = Flask(__name__)
 # POST /contacts endpoint – Lisa, fortsette på den
 @app.route('/contacts', methods=['POST'])
 def new_contact():
-    vcard_parser()
-    with open('export.json') as file:
+    file = request.files['file']
+    # file.save('/' + file.filename)
+    file.save(secure_filename(file.filename))
+    return 'file uploaded successfully'
+    vcard_parser(file)
+    with open('data.json') as file:
         file_data = json.load(file)
     if isinstance(file_data, list):
         collection.insert_many(file_data)

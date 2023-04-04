@@ -1,8 +1,8 @@
-def vcard_parser():
+def vcard_parser(file):
     import json
 
-    INPUT_NAME = 'vcard.vcf'
-    OUTPUT_NAME = 'export.json'
+    INPUT_NAME = file
+    OUTPUT_NAME = 'data.json'
 
     with open(INPUT_NAME, 'r') as f:
         text = f.read()
