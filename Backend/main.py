@@ -4,6 +4,7 @@ from flask import Flask, render_template, request, redirect, url_for, jsonify
 import json
 import html
 import os
+import bson
 
 # Import files
 import database
@@ -11,6 +12,7 @@ import functions
 import vcard_parser
 
 # Imported functions from files
+from database import db
 from database import collection
 from vcard_parser import vcard_parser
 # from functions import
@@ -19,7 +21,6 @@ from vcard_parser import vcard_parser
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = '/vcard_files'
 
-#hei
 
 
 # Rendre HTML formet
@@ -30,6 +31,7 @@ def upload_file():
 
 # POST /contacts endpoint – Lisa, fortsette på den
 @app.route('/contacts', methods=['POST'])
+def new_contact():
 def new_contact():
     # Hente filen fra html formet
     if request.method == 'POST':
@@ -50,8 +52,48 @@ def new_contact():
         else:
             collection.insert_one(file_data)
         return jsonify(file_data)
+        
 
-    
+
+#GET/contacts -  Finds all contacts 
+@app.route('/contacts', methods=['GET'])
+def getAllContacts():
+ result = collection.find()
+ return f' {(list(result))}'
+  
+
+
+#GET/contacts/<id> - Shows one contact based off id
+@app.route('/contacts/<id>', methods=['GET'])
+def getContacts(id):
+  from bson.objectid import ObjectId
+  #Kan displaye dokument basert på id, men hvis man går på routen (/:id) så finner den ikke id.
+  result = collection.find_one({"_id": ObjectId(id)})
+  return f'{result}'
+
+
+
+# GET /contacts/vcard (vcard)
+@app.route('/contacts/vcard', methods=['GET'])
+def getVCard():
+ print("hi")
+
+
+
+# GET /contacts/id/vcard (vcard)
+@app.route('/contacts/<id>/vcard', methods=['GET'])
+def getVCardID(id):
+   print("hi")
+
+
+
+# user_data = export.json
+  # implement code to create and return user data
+  # return jsonify(user)
+
+ # return jsonify(file_data)
+
+
 ''' 
     The POST api endpoint does this:
     
@@ -67,19 +109,13 @@ def new_contact():
 
     4. !Returning the json object as output (doesn't work)
 '''
-        
 
-# GET /contacts endpoint (json) – Alexandra
 
-# GET /contacts/id endpoint (json) - Anosh
-
-# GET /contacts/vcard (vcard)
-
-# GET /contacts/id/vcard (vcard)
 
 
 
 # Just a standard if that is needed in every flask application
 if __name__ == '__main__':
     app.run(port=3000, debug=True)
+
 
