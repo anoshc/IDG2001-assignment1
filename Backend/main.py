@@ -9,13 +9,14 @@ import bson
 # Import files
 import database
 import functions
-import vcard_parser
+import vcard_to_json_parser
+import json_to_vcard_parser
 
 # Imported functions from files
 from database import db
 from database import collection
-from vcard_parser import vcard_parser
-# from functions import
+from vcard_to_json_parser import vcard_parser
+#from json_to_vcard_parser import ...
 
 # Set the flask app
 app = Flask(__name__)
