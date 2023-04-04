@@ -1,5 +1,6 @@
 # Import modules
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, redirect, url_for, jsonify
+#from werkzeug import secure_filename
 import json
 import html
 import os
@@ -18,24 +19,40 @@ from vcard_parser import vcard_parser
 
 # Set the flask app
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = '/vcard_files'
 
+
+
+# Rendre HTML formet
+@app.route('/')
+def upload_file():
+   return render_template('index.html')
+   
 
 # POST /contacts endpoint – Lisa, fortsette på den
 @app.route('/contacts', methods=['POST'])
 def new_contact():
-    vcard_parser()
-    with open('export.json') as file:
-        file_data = json.load(file)
-    if isinstance(file_data, list):
-        collection.insert_many(file_data)
-        response = {'message': 'Inserted many documents to the database'}
-        return jsonify(response)
+def new_contact():
+    # Hente filen fra html formet
+    if request.method == 'POST':
+        uploaded_file = request.files['file']
+        # Om filen ikke er tom, gjør dette:
+        if uploaded_file.filename != '':
+            uploaded_file.save(uploaded_file.filename) # Saver filen
+            vcard_parser(uploaded_file.filename) # Parse filen til JSON
+            return 'File read successfully and uploaded to database!'
+        else:
+            return 'Could not read file, try again.'
+    
+    # Pushe filen til databasen
+    with open('data.json') as data:
+        file_data = json.load(data)
+        if isinstance(file_data, list):
+            collection.insert_many(file_data)
+        else:
+            collection.insert_one(file_data)
+        return jsonify(file_data)
         
-    else:
-        collection.insert_one(file_data)
-        response = {'message': 'Inserted one document to the database'}
-        return jsonify(response)
-
 
 
 #GET/contacts -  Finds all contacts 
@@ -70,13 +87,11 @@ def getVCardID(id):
 
 
 
- # user_data = export.json
-    # implement code to create and return user data
-    # return jsonify(user)
+# user_data = export.json
+  # implement code to create and return user data
+  # return jsonify(user)
 
-   # return jsonify(file_data)
-
-
+ # return jsonify(file_data)
 
 
 ''' 

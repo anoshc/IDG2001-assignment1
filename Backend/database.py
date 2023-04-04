@@ -2,7 +2,7 @@ from flask import Flask
 from pymongo import MongoClient
 from dotenv import dotenv_values
 
-app = Flask(__name__)
+# app = Flask(__name__)
 
 config = dotenv_values('.env')
 mongo_uri = config['MONGO_URI']
@@ -16,6 +16,6 @@ for document in documents:
    print(document)
    
 
-if __name__ == '__main__':
-    app.run(port=3000)
+# if __name__ == '__main__':
+#     app.run(port=3000)
     # app.run(host=os.getenv('HOST', 'localhost'), port=os.getenv('PORT', '5000'))
