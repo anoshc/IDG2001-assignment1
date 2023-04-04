@@ -1,6 +1,5 @@
 def vcard_parser( file ):   
-
-    #her må ej få hentet formet 
+    
     import json
 
     INPUT_NAME = file
