@@ -4,3 +4,4 @@ pip install mongodb
 pip install pymongo flask
 pip install pymongo
 python -m pip install requests
+pip install -U Werkzeug
