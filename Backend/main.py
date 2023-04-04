@@ -19,7 +19,8 @@ from vcard_parser import vcard_parser
 
 # Set the flask app
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = '/vcard_files'
+#app.config['UPLOAD_FOLDER'] = '/uploaded_vcards'
+
 
 
 
@@ -39,6 +40,7 @@ def new_contact():
         if uploaded_file.filename != '':
             uploaded_file.save(uploaded_file.filename) # Saver filen
             vcard_parser(uploaded_file.filename) # Parse filen til JSON
+            os.remove(uploaded_file.filename) # Remove the uploaded file locally 
             return 'File read successfully and uploaded to database!'
         else:
             return 'Could not read file, try again.'
@@ -52,7 +54,6 @@ def new_contact():
             collection.insert_one(file_data)
         return jsonify(file_data)
         
-
 
 #GET/contacts -  Finds all contacts 
 @app.route('/contacts', methods=['GET'])
