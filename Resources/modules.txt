@@ -5,8 +5,8 @@ pip install pymongo flask
 pip install pymongo
 python -m pip install requests
 pip install vobject 
+pip install bson
+pip install os
 
 import json
 import html
-import os
-import bson

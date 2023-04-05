@@ -1,5 +1,5 @@
 # Import modules
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_file, make_response
 import json
 import html
 import os
@@ -25,7 +25,7 @@ app = Flask(__name__)
 # Render the HTML form to the page
 @app.route('/')
 def upload_file():
-   return render_template('index.html')
+    return render_template('index.html')
    
 # POST/contacts endpoint - Get the uploaded vcf-file, parse it to JSON, and push it to the database. 
 @app.route('/contacts', methods=['POST'])
@@ -55,18 +55,18 @@ def new_contact():
 # GET/contacts - Show all contacts 
 @app.route('/contacts', methods=['GET'])
 def getAllContacts():
- result = collection.find()
- return f' {(list(result))}'
+    result = collection.find()
+    return f' {(list(result))}'
   
 
 
 # GET/contacts/<id> - Shows one contact based on id
 @app.route('/contacts/<id>', methods=['GET'])
 def getContacts(id):
-  from bson.objectid import ObjectId
-  #Kan displaye dokument basert på id, men hvis man går på routen (/:id) så finner den ikke id.
-  result = collection.find_one({"_id": ObjectId(id)})
-  return f'{result}'
+    from bson.objectid import ObjectId
+    #Kan displaye dokument basert på id, men hvis man går på routen (/:id) så finner den ikke id.
+    result = collection.find_one({"_id": ObjectId(id)})
+    return f'{result}'
 
 
 
@@ -74,13 +74,18 @@ def getContacts(id):
 @app.route('/contacts/vcard', methods=['GET'])
 def getVCard():
     json_parser() # Kjører når vi skriver in routen i postman om man vil teste
-
-
+    vcards_json = json_parser()
+    return jsonify(vcards_json) # Pushes the json to the Postman output
+    
+    # Prøver å laste ned vcard.json filen her (som inneholder vcard stringen)
+    # response = make_response(send_file('vcard.json', as_attachment=True, attachment_filename='data.vcf')) 
+    # response.headers['Content-Disposition'] = 'attachment; filename=data.vcf'
+    # return response
 
 # GET /contacts/id/vcard (vcard) – Parse one contact (based on id) in json back to vcf, and shows that one contact in vcf.
 @app.route('/contacts/<id>/vcard', methods=['GET'])
 def getVCardId(id):
-   print("hi")
+    print("hi")
 
 
 
