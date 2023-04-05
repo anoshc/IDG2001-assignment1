@@ -10,8 +10,13 @@
     <h1>File Upload Form</h1>
 	<form action="http://127.0.0.1:3000/contacts" method="POST" enctype="multipart/form-data" accept=".vcf">
 		<p><input type="file" name="file" id="file"></p>
-		<p><input type="submit" value="Upload" onclick="uploadFile()"></p>
+		<p><input type="submit" value="Upload"></p>
 	</form>
+
+    <h2>Download all vcards from the database</h2>
+    <form action="http://127.0.0.1:3000/contacts/vcard" method="GET">
+        <p><input type="button" value="Download"></p>
+    </form>
 
 <!-- <script src="./form.js"></script> -->
 </body>
