@@ -1,4 +1,4 @@
-# Denne parseren er inspirert fra Cloud lab 2
+# Denne parseren er inspirert fra IDG2001 Cloud Technologies Lab 2
 
 # Set the file as a parameter
 def vcard_parser( file ):   
