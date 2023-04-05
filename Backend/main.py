@@ -1,6 +1,5 @@
 # Import modules
 from flask import Flask, render_template, request, jsonify
-#from werkzeug import secure_filename
 import json
 import html
 import os
@@ -8,7 +7,6 @@ import bson
 
 # Import files
 import database
-import functions
 import vcard_to_json_parser
 import json_to_vcard_parser
 
@@ -85,4 +83,4 @@ def getVCardID(id):
 
 
 
-app.run()
+app.run(port=3000)
