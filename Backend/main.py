@@ -4,6 +4,7 @@ import json
 import html
 import os
 import bson
+import vobject
 
 # Import files
 import database
@@ -14,7 +15,7 @@ import json_to_vcard_parser
 from database import db
 from database import collection
 from vcard_to_json_parser import vcard_parser
-#from json_to_vcard_parser import ...
+from json_to_vcard_parser import json_parser
 
 # Set the flask app
 app = Flask(__name__)
@@ -72,13 +73,13 @@ def getContacts(id):
 # GET /contacts/vcard (vcard) – Parse the contacts in json back to vcf, and shows all contacts in vcf. 
 @app.route('/contacts/vcard', methods=['GET'])
 def getVCard():
- print("hi")
+    json_parser() # Kjører når vi skriver in routen i postman om man vil teste
 
 
 
 # GET /contacts/id/vcard (vcard) – Parse one contact (based on id) in json back to vcf, and shows that one contact in vcf.
 @app.route('/contacts/<id>/vcard', methods=['GET'])
-def getVCardID(id):
+def getVCardId(id):
    print("hi")
 
 
