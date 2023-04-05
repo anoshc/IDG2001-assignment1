@@ -50,7 +50,9 @@ def json_parser():
 
     # Combine the vCard strings into a single JSON string
     vcards_json = json.dumps(vcard_str_list, indent=2)
-
+    
     # Save the JSON string to the vcard.json file
     with open('vcard.json', 'w') as f:
         f.write(vcards_json)
+
+    return vcards_json
