@@ -1,36 +1,56 @@
-# import json
-# import vobject
+def json_parser():
 
-# # Load the JSON data from the file
-# with open('data.json', 'r') as f:
-#     data = json.load(f)
+    import vobject
+    import json
+    from database import collection
 
-# # Create a new vCard object for each JSON object
-# vcards = []
-# for obj in data:
-#     # Create a new vCard object
-#     vcard = vobject.vCard()
+    #Load the JSON object from the MongoDB colelction
+    data = list(collection.find())
 
-#     # Set the name and organization fields
-#     vcard.add('n')
-#     vcard.n.value = vobject.vcard.Name(family=obj['name'].split(';')[0], given=obj['name'].split(';')[1])
-#     vcard.add('org')
-#     vcard.org.value = [obj['organisation']]
+    # Create a vCard object
+    vcard = vobject.vCard()
 
-#     # Set the address field
-#     vcard.add('adr')
-#     vcard.adr.value = vobject.vcard.Address(street=obj['address'].split(';')[2], city=obj['address'].split(';')[3], region=obj['address'].split(';')[4], code=obj['address'].split(';')[5], country=obj['address'].split(';')[6])
+    # Create empty vcard object list
+    vcards = []
 
-#     # Set the phone and email fields
-#     vcard.add('tel')
-#     vcard.tel.value = obj['telefon']
-#     vcard.add('email')
-#     vcard.email.value = obj['email']
+    # Loop through the items in data
+    for item in data:
+        # Create a vCard object
+        vcard = vobject.vCard()
 
-#     # Add the vCard object to the list
-#     vcards.append(vcard)
+        # Set the properties from the MongoDB data
+        # The get() adds a default text if the item doesn't exsist. 
+        vcard.add('birthday').value = item.get('birthday', 'No Birthday')
+        vcard.add('version').value = item.get('version', 'No Version')
+        vcard.add('name').value = item.get('name', 'No Name')
+        vcard.add('fn').value = item.get('first name', 'No First Name')
+        vcard.add('org').value = item.get('organisation', 'No Organisation')
+        vcard.add('tel').value = item.get('telefon', 'No Telefon')
+        vcard.add('email').value = item.get('email', 'No Email')
+        address = item.get('address')
+        if address:
+            street = address.split(';')[2]
+            city = address.split(';')[3]
+            region = address.split(';')[4]
+            code = address.split(';')[5]
+            country = address.split(';')[6]
+            vcard.add('adr').value = vobject.vcard.Address(
+                street=street or '',
+                city=city or '',
+                region=region or '',
+                code=code or '',
+                country=country or ''
+            )
 
-# # Write the vCard objects to a file
-# with open('output.vcf', 'w') as f:
-#     for vcard in vcards:
-#         f.write(vcard.serialize())
+        # Add the vCard to the list
+        vcards.append(vcard)
+
+    # Serialize the vCards to a list of strings in 
+    vcard_str_list = [vcard.serialize() for vcard in vcards]
+
+    # Combine the vCard strings into a single JSON string
+    vcards_json = json.dumps(vcard_str_list, indent=2)
+
+    # Save the JSON string to the vcard.json file
+    with open('vcard.json', 'w') as f:
+        f.write(vcards_json)

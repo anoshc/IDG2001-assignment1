@@ -1,19 +1,25 @@
+# Denne parseren er inspirert fra Cloud lab 2
+
+# Set the file as a parameter
 def vcard_parser( file ):   
     
     import json
 
+    # Set the name of the files
     INPUT_NAME = file
     OUTPUT_NAME = 'data.json'
 
+    # Open the input file
     with open(INPUT_NAME, 'r') as f:
         text = f.read()
 
+    # Split the texts from start to end
     contact_texts = text.split('END:VCARD\nBEGIN:VCARD')
 
     contact_texts[0] = contact_texts[0].replace('BEGIN:VCARD\n', '')
     contact_texts[-1] = contact_texts[-1].replace('END:VCARD\n', '')
 
-
+    # Fixing keys
     def fix_key(key):
         key_main = key.split(';')[0]
         return {
@@ -27,7 +33,7 @@ def vcard_parser( file ):
             'EMAIL': 'email'
         }.get(key_main, key)
 
-
+    # Put the contacts inside a contact object
     contacts = []
     for contact_text in contact_texts:
 
@@ -48,5 +54,6 @@ def vcard_parser( file ):
 
     json_text = json.dumps(contacts, indent=2)
 
+    # Put the result inside file
     with open(OUTPUT_NAME, 'w') as f:
         f.write(json_text)
