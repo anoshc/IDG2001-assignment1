@@ -8,16 +8,17 @@
 </head>
 <body>
     <h1>File Upload Form</h1>
-	<form action="http://127.0.0.1:3000/contacts" method="POST" enctype="multipart/form-data" accept=".vcf">
+	<form action="http://127.0.0.1:3000/contacts" method="POST" enctype="multipart/form-data" accept=".vcf, application/vcard, application/x-vcard text/vcard, text/x-vcard">
 		<p><input type="file" name="file" id="file"></p>
 		<p><input type="submit" value="Upload"></p>
 	</form>
 
     <h2>Download all vcards from the database</h2>
-    <form action="http://127.0.0.1:3000/contacts/vcard" method="GET">
-        <p><input type="button" value="Download"></p>
-    </form>
+    <!-- <form action="http://127.0.0.1:3000/contacts/vcard" method="GET">
+        <p><input type="submit" value="Download" onclick="downloadFile()"></p>
+    </form> -->
+    <button onclick="downloadFile()">Download Data</button>
 
-<!-- <script src="./form.js"></script> -->
+<script src="download.js"></script>
 </body>
 </html>

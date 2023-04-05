@@ -1,3 +1,5 @@
+# Denne parseren er inspirert fra IDG2001 Cloud Technologies Lab 2
+
 def json_parser():
 
     import vobject
