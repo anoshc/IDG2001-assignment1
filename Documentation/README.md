@@ -1,9 +1,10 @@
 # IDG2001 Assignment 1 – Lisa Mari, Anosh, and Alexandra
+09.04.2023
 
 ## About the project 
 
 In this project we have creates a Flask application that is running in the Railway Cloud server.
-The application have several API endpoints that connects to both the cloud and the MongoDB database. 
+The application have several REST API endpoints that connects to both the cloud and the MongoDB database. 
 These endpoints/routes have different functionalities, that we will further explain:
 
     1. @app.route('/')
