@@ -1,6 +1,6 @@
 # IDG2001 Assignment 1 – Lisa Mari, Anosh, and Alexandra
 
-## About the project
+## About the project 
 
 In this project we have creates a Flask application that is running in the Railway Cloud server.
 The application have several API endpoints that connects to both the cloud and the MongoDB database. 
