@@ -1,4 +1,4 @@
-# Denne parseren er inspirert fra IDG2001 Cloud Technologies Lab 2
+# Denne parseren er inspirert fra IDG2001 Cloud Technologies Lab 3
 
 def json_parser():
 
@@ -6,7 +6,7 @@ def json_parser():
     import json
     from database import collection
 
-    #Load the JSON object from the MongoDB colelction
+    #Load the JSON object from the MongoDB collection
     data = list(collection.find())
 
     # Create a vCard object
@@ -51,10 +51,13 @@ def json_parser():
     vcard_str_list = [vcard.serialize() for vcard in vcards]
 
     # Combine the vCard strings into a single JSON string
+    # Source: https://docs.python.org/3/library/json.html 
     vcards_json = json.dumps(vcard_str_list, indent=2)
     
     # Save the JSON string to the vcard.json file
+    # This step is optional, but if you want a better view of the output then we added a file here as well. 
     with open('vcard.json', 'w') as f:
         f.write(vcards_json)
 
+    # Return the output so we can access it in the API
     return vcards_json
