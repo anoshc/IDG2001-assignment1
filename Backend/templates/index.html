@@ -6,11 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IDG2001 Assignment 1 - Lisa Mari, Anosh, Alexandra</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <!-- Upload file form, only accepting vcard and vcf format -->
-    <h1>File Upload Form</h1>
+    
+    <main>
+    <h1>Vcard Parser</h1>
+
+    <h2>Upload Vcard </h2>
     <form action="http://127.0.0.1:3000/contacts" method="POST" enctype="multipart/form-data"
         accept=".vcf, application/vcard, application/x-vcard text/vcard, text/x-vcard">
         <p><input type="file" name="file" id="file"></p>
@@ -52,6 +60,7 @@
             }
         }
     </script>
+    </main>
 </body>
 
 </html>
