@@ -1,3 +1,6 @@
+# Denne parseren er inspirert fra IDG2001 Cloud Technologies Lab 3
+
+# * This function finds a collection object based on id, and parses it from json to vcard
 def json_id_parser(id):
 
     import vobject
@@ -43,4 +46,4 @@ def json_id_parser(id):
     vcards_id_json = json.dumps(vcard_str, indent=2)
     
     # Return the output so we can access it in the api
-    return vcards_id_json
+    return {"message" : vcards_id_json}

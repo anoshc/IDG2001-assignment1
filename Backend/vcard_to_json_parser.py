@@ -1,5 +1,6 @@
 # Denne parseren er inspirert fra IDG2001 Cloud Technologies Lab 3
 
+# * This function takes the uploaded file as input, and parses it from vcard to json
 # Set the file as a parameter
 def vcard_parser( file ):   
     
@@ -55,5 +56,6 @@ def vcard_parser( file ):
     json_text = json.dumps(contacts, indent=2)
 
     # Put the result inside file
+    # This step is optional, but if you want a better view of the output then we added a file here as well.
     with open(OUTPUT_NAME, 'w') as f:
         f.write(json_text)
