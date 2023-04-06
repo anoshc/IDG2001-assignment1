@@ -77,10 +77,7 @@ def getVCard():
     vcards_json = json_parser()
     return jsonify(vcards_json) # Pushes the json to the Postman output
     
-    # Prøver å laste ned vcard.json filen her (som inneholder vcard stringen)
-    # response = make_response(send_file('vcard.json', as_attachment=True, attachment_filename='data.vcf')) 
-    # response.headers['Content-Disposition'] = 'attachment; filename=data.vcf'
-    # return response
+
 
 # GET /contacts/id/vcard (vcard) – Parse one contact (based on id) in json back to vcf, and shows that one contact in vcf.
 @app.route('/contacts/<id>/vcard', methods=['GET'])
