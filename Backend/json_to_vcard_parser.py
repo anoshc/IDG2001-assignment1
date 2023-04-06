@@ -1,5 +1,6 @@
 # Denne parseren er inspirert fra IDG2001 Cloud Technologies Lab 3
 
+# * This function finds all collections objects, and parses it from json to vcard
 def json_parser():
 
     import vobject
@@ -53,11 +54,6 @@ def json_parser():
     # Combine the vCard strings into a single JSON string
     # Source: https://docs.python.org/3/library/json.html 
     vcards_json = json.dumps(vcard_str_list, indent=2)
-    
-    # Save the JSON string to the vcard.json file
-    # This step is optional, but if you want a better view of the output then we added a file here as well. 
-    with open('vcard.json', 'w') as f:
-        f.write(vcards_json)
 
     # Return the output so we can access it in the API
-    return vcards_json
+    return {"message" : vcards_json}
