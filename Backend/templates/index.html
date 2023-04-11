@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IDG2001 Assignment 1 - Lisa Mari, Anosh, Alexandra</title>
-    <!-- <link rel="stylesheet" type="text/css" href="../styles.css" /> -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
@@ -21,7 +20,6 @@
         background: linear-gradient(to left, #E2E2E2, #C9D6FF);
         /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     }
-
     main {
         background-color: white;
         border-radius: 20px;
@@ -29,21 +27,18 @@
         margin: 60px;
         justify-self: center;
     }
-
     h1 {
         display: flex;
         justify-content: center;
         margin: 0 auto;
         font-size: 2.5em;
     }
-
     h1,
     h2,
     button,
     input {
         font-family: 'Quicksand';
     }
-
     button,
     input {
         background-image: linear-gradient(to right, #DAE2F8 0%, #D6A4A4 51%, #DAE2F8 100%);
@@ -59,7 +54,6 @@
         border: none;
         width: 290px;
     }
-
     button:hover,
     input:hover {
         background-position: right center;
@@ -67,18 +61,16 @@
         color: #fff;
         text-decoration: none;
     }
-
     input[type=file] {
         width: 200px;
     }
 </style>
 
 <body>
-    <!-- Upload file form, only accepting vcard and vcf format -->
-    
-    <main>
+<main>
     <h1>Vcard Parser</h1>
 
+    <!-- Upload file form, only accepting vcard and vcf format -->
     <h2>Upload Vcard </h2>
     <form action="http://127.0.0.1:3000/contacts" method="POST" enctype="multipart/form-data"
         accept=".vcf, application/vcard, application/x-vcard text/vcard, text/x-vcard">
@@ -121,7 +113,7 @@
             }
         }
     </script>
-    </main>
+</main>
 </body>
 
 </html>
