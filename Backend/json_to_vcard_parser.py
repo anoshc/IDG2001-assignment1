@@ -7,7 +7,7 @@ def json_parser():
     import json
     from database import collection
 
-    #Load the JSON object from the MongoDB collection
+    # Load the JSON object from the MongoDB collection
     data = list(collection.find())
 
     # Create a vCard object
@@ -22,7 +22,7 @@ def json_parser():
         vcard = vobject.vCard()
 
         # Set the properties from the MongoDB data
-        # The get() adds a default text if the item doesn't exsist. 
+        # The get() adds a default text if the item doesn't exsist.
         vcard.add('birthday').value = item.get('birthday', 'No Birthday')
         vcard.add('version').value = item.get('version', 'No Version')
         vcard.add('name').value = item.get('name', 'No Name')
@@ -48,11 +48,11 @@ def json_parser():
         # Add the vCard to the list
         vcards.append(vcard)
 
-    # Serialize the vCards to a list of strings in 
+    # Serialize the vCards to a list of strings in
     vcard_str_list = [vcard.serialize() for vcard in vcards]
 
     # Combine the vCard strings into a single JSON string
-    # Source: https://docs.python.org/3/library/json.html 
+    # Source: https://docs.python.org/3/library/json.html
     vcards_json = json.dumps(vcard_str_list, indent=2)
 
     # Return the output so we can access it in the API

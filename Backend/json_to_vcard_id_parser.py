@@ -8,14 +8,14 @@ def json_id_parser(id):
     from database import collection
     from bson.objectid import ObjectId
 
-    #Load the JSON object from the MongoDB colelction
+    # Load the JSON object from the MongoDB colelction
     data = collection.find_one({"_id": ObjectId(id)})
     
     # Create a vCard object
     vcard = vobject.vCard()
     
     # Set the properties from the MongoDB data
-    # The get() adds a default text if the item doesn't exsist. 
+    # The get() adds a default text if the item doesn't exsist.
     vcard.add('birthday').value = data.get('birthday', 'No Birthday')
     vcard.add('version').value = data.get('version', 'No Version')
     vcard.add('name').value = data.get('name', 'No Name')
@@ -38,11 +38,11 @@ def json_id_parser(id):
             country=country or ''
         )
 
-    # Serialize the vCards to a list of strings in 
+    # Serialize the vCards to a list of strings in
     vcard_str = vcard.serialize()
 
     # Combine the vCard strings into a single JSON string
-    # Source: https://docs.python.org/3/library/json.html 
+    # Source: https://docs.python.org/3/library/json.html
     vcards_id_json = json.dumps(vcard_str, indent=2)
     
     # Return the output so we can access it in the api
