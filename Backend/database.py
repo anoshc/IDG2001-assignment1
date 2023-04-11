@@ -12,5 +12,5 @@ collection = db['vcard']
 
 # Find all documents in collection
 documents = collection.find({})
-   for document in documents:
-      print(document)
+for document in documents:
+   print(document)
