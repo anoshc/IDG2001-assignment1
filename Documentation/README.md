@@ -1,5 +1,9 @@
 # IDG2001 Assignment 1 – Lisa Mari, Anosh, and Alexandra
 
+## GitHub link to repo
+
+https://github.com/anoshc/IDG2001-assignment1
+
 ## About the project 
 
 In this project we have creates a Flask application that is running in the Railway Cloud server.
