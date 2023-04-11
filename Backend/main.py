@@ -38,12 +38,12 @@ def new_contact():
         uploaded_file = request.files['file']
         # If the file is NOT empty, do this:
         if uploaded_file.filename != '':
-            uploaded_file.save(uploaded_file.filename) # Saves the file
-            vcard_parser(uploaded_file.filename) # Parsing the file to JSON
-            os.remove(uploaded_file.filename) # Remove the vcf file locally
+            uploaded_file.save(uploaded_file.filename)  # Saves the file
+            vcard_parser(uploaded_file.filename)  # Parsing the file to JSON
+            os.remove(uploaded_file.filename)  # Remove the vcf file locally
             return 'File read successfully and uploaded to database!'
         else:
-            return 'Could not read file, try again.' # In case of error
+            return 'Could not read file, try again.'  # In case of error
     
     # Push the file to the database
     with open('data.json') as data:
@@ -72,9 +72,9 @@ def getContacts(id):
 # * GET route '/contacts/vcard' (vcard) – Parses the contacts in json back to vcf, and shows all contacts in vcf. 
 @app.route('/contacts/vcard', methods=['GET'])
 def getVCard():
-    json_parser() # Runs when we type in the route in Postman
+    json_parser()  # Runs when we type in the route in Postman
     vcards_json = json_parser()
-    return jsonify(vcards_json) # Pushes the json to the Postman output
+    return jsonify(vcards_json)  # Pushes the json to the Postman output
     
 
 # * GET route '/contacts/id/vcard' (vcard) – Parses one contact (based on id) in json back to vcf, and shows that one contact in vcf.
