@@ -1,4 +1,3 @@
-from flask import Flask
 from pymongo import MongoClient
 from dotenv import dotenv_values
 
@@ -15,4 +14,3 @@ collection = db['vcard']
 documents = collection.find({})
 for document in documents:
    print(document)
-   
