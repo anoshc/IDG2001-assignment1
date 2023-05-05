@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IDG2001 Assignment 1 - Lisa Mari, Anosh, Alexandra</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="./index.css">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<main>
+    <h1>Vcard Parser</h1>
+
+    <!-- Upload file form, only accepting vcard and vcf format -->
+    <h2>Upload Vcard </h2>
+    <form action="http://127.0.0.1:3000/contacts" method="POST" enctype="multipart/form-data"
+        accept=".vcf, application/vcard, application/x-vcard text/vcard, text/x-vcard">
+        <p><input type="file" name="file" id="file"></p>
+        <p><input type="submit" value="Upload"></p>
+    </form>
+
+    <!-- Download file button, triggering the 'downloadData' function when clicking -->
+    <h2>Download all vcards from the database</h2>
+    <button onclick="downloadData()">Download data</button>
+
+    <!-- We had to put the JavaScript script inline, because it couldn't find the seperate js file otherwise -->
+    <script> // Må få flytta denne til index.js tror jeg, men korleis calla vi funksjonen her
+        async function downloadData() {
+            // Put it inside a try...catch statement incase of errors. 
+            try {
+                // Making an AJAX request to fetch the data from the API endpoint (to exchange data with a server).
+                // Source: https://www.w3schools.com/xml/ajax_xmlhttprequest_send.asp 
+                const response = await fetch("/contacts/vcard"); // Defining the API endpoint path.
+                const data = await response.json();
+
+                // Create a 'blob' (a file-like object for file handling) with the data.
+                // Source: https://developer.mozilla.org/en-US/docs/Web/API/Blob 
+                const blob = new Blob([JSON.stringify(data)], { type: "text/vcard" });
+
+                // Create a download link for the blob.
+                const url = URL.createObjectURL(blob);
+
+                // Create a link element and that starts the download when clicking o it.
+                const link = document.createElement("a");
+                link.href = url;
+                link.download = "data.json";
+                document.body.appendChild(link);
+                link.click();
+
+                // Cleanup the URL object
+                URL.revokeObjectURL(url);
+            }  catch (error) {
+                console.error(error);
+            }
+        }
+    </script>
+</main>
+</body>
+
+</html>
